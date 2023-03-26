@@ -1,10 +1,11 @@
 const { MongoClient } = require("mongodb");
+require('dotenv/config');
 const express = require('express');
 const cors = require('cors')
 const bcrypt = require('bcrypt');
 
 // Substitua a string uri pela string de conexão do MongoDB
-const uri = "mongodb+srv://ber:admin@cluster0.vakij6c.mongodb.net/?retryWrites=true&w=majority";
+const uri = process.env.MYURI;
 const client = new MongoClient(uri, { useUnifiedTopology: true });
 
 const app = express();
