@@ -1,9 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Login from './Components/Login/Login';
-import Register from './Components/Register/Register';
-import MyDelete from './MyDelete';
-ReactDOM.render(
-  <Register />,
-  document.getElementById('root')
+import { BrowserRouter } from 'react-router-dom';
+import App from './App';
+
+ReactDOM.createRoot(document.getElementById('root')).render(
+  <BrowserRouter>
+    <App />
+  </BrowserRouter>
 );
