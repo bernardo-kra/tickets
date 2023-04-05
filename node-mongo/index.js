@@ -1,5 +1,6 @@
 const { MongoClient } = require("mongodb");
 require('dotenv/config');
+const jwt = require('jsonwebtoken');
 const express = require('express');
 const cors = require('cors')
 const bcrypt = require('bcrypt');
@@ -11,6 +12,25 @@ const client = new MongoClient(uri, { useUnifiedTopology: true });
 const app = express();
 app.use(cors())
 app.use(express.json());
+
+// Middleware para verificar o token de acesso em todas as rotas protegidas
+const verificarToken = (req, res, next) => {
+    const token = req.header('Authorization');
+    if (!token) {
+        return res.status(401).json({ mensagem: 'Token de acesso não fornecido' });
+    }
+
+    jwt.verify(token, process.env.TOKEN_SIGNATURE, (err, decoded) => {
+        if (err) {
+            return res.status(401).json({ mensagem: 'Token de acesso inválido' });
+        }
+
+        req.usuario = decoded;
+        next();
+    });
+};
+
+// app.use(verificarToken)
 
 app.post('/user', async (req, res) => {
     const { firstName, lastName, email, phone, password } = req.body;
@@ -41,6 +61,36 @@ app.post('/user', async (req, res) => {
 app.get("/user", async (req, res) => {
     res.send(req.body)
 })
+
+app.post('/login', async (req, res) => {
+    try {
+        await client.connect();
+        const { email, password } = req.body;
+
+        // Buscar usuário no banco de dados
+        const database = client.db('tickets');
+        const collection = database.collection('user');
+        const usuario = await collection.findOne({ email });
+
+        // Verificar se o usuário existe e se a password está correta
+        if (!usuario || !bcrypt.compareSync(password, usuario.password)) {
+            return res.status(401).json({ mensagem: 'Credenciais inválidas' });
+        }
+
+        // Gerar token de acesso
+        const token = jwt.sign({ id: usuario._id, email: usuario.email }, process.env.TOKEN_SIGNATURE, { expiresIn: '60s' });
+
+        // Retornar token de acesso
+        return res.status(200).json({ token });
+    } catch (err) {
+        console.error(err);
+        return res.status(500).json({ mensagem: 'Erro interno do servidor' });
+    }
+});
+
+app.get('/protegido', verificarToken, (req, res) => {
+    return res.status(200).json({ mensagem: 'Acesso permitido', usuario: req.usuario });
+});
 
 const PORT = process.env.PORT || 3001;
 

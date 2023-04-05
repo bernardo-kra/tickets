@@ -12,8 +12,7 @@ function Register() {
         phone,
         password,
         confirmPassword
-    }
-        = useRegister()
+    } = useRegister()
 
     return (
         <div className="registration-container">

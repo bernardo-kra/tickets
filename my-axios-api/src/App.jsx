@@ -1,17 +1,23 @@
 import React from 'react';
-import axios from 'axios';
-function App() {
-  axios.get('https://reqres.in/api/users')
-    .then(response => {
-      // manipular dados de resposta
-      console.log(response);
-    })
-    .catch(err => {
-      // manipular erros
-      console.log(err);
-    });
+import { Routes, Route } from 'react-router-dom';
+import Header from './Components/Home/Header/Header.jsx';
+import Home from './Components/Home/Home.jsx';
+import Register from './Components/Register/Register.jsx';
+import Navigation from './components/Navigation';
+import Login from './Components/Login/Login.jsx';
+
+
+const App = () => {
   return (
-    <p>Teste com API Axios</p>
+    <>
+      <h1>React Router</h1>
+      <Navigation />
+      <Routes>
+        <Route path="/home" element={<Home />} />
+        <Route path="/register" element={<Register />} />
+        <Route path="/login" element={<Login />} />
+      </Routes>
+    </>
   );
-}
+};
 export default App;
