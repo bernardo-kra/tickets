@@ -25,7 +25,7 @@ const verificarToken = (req, res, next) => {
             return res.status(401).json({ mensagem: 'Token de acesso inválido' });
         }
 
-        req.usuario = decoded;
+        req.user = decoded;
         next();
     });
 };
@@ -70,18 +70,22 @@ app.post('/login', async (req, res) => {
         // Buscar usuário no banco de dados
         const database = client.db('tickets');
         const collection = database.collection('user');
-        const usuario = await collection.findOne({ email });
+        const user = await collection.findOne({ email });
 
-        // Verificar se o usuário existe e se a password está correta
-        if (!usuario || !bcrypt.compareSync(password, usuario.password)) {
+        if (!user || !bcrypt.compareSync(password, user.password)) {
             return res.status(401).json({ mensagem: 'Credenciais inválidas' });
         }
 
-        // Gerar token de acesso
-        const token = jwt.sign({ id: usuario._id, email: usuario.email }, process.env.TOKEN_SIGNATURE, { expiresIn: '60s' });
+        const token = jwt.sign({ id: user._id, email: user.email }, process.env.TOKEN_SIGNATURE, { expiresIn: '3h' });
 
-        // Retornar token de acesso
-        return res.status(200).json({ token });
+        return res.status(200).json({
+            token,
+            user: {
+                id: user._id,
+                email: user.email,
+                nome: user.nome,
+            },
+        });
     } catch (err) {
         console.error(err);
         return res.status(500).json({ mensagem: 'Erro interno do servidor' });
@@ -89,7 +93,7 @@ app.post('/login', async (req, res) => {
 });
 
 app.get('/protegido', verificarToken, (req, res) => {
-    return res.status(200).json({ mensagem: 'Acesso permitido', usuario: req.usuario });
+    return res.status(200).json({ mensagem: 'Acesso permitido', user: req.user });
 });
 
 const PORT = process.env.PORT || 3001;

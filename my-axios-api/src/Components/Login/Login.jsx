@@ -1,25 +1,32 @@
-import { useState } from 'react';
-import './Login.css';
+import { useState, useEffect, useContext } from 'react'
+import { AuthContext,  } from "../auth/AuthProvider"
+import './Login.css'
 
 function Login() {
-  const [username, setUsername] = useState("");
+  const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const { isLoggedIn, login } = useContext(AuthContext)
 
   const handleSubmit = (event) => {
-    event.preventDefault();
-    console.log(`Submitting username ${username} and password ${password}`);
-  };
+    event.preventDefault()
+    const credentials = { email, password }
+    login(credentials)
+  }
+
+    if (isLoggedIn) {
+      return window.location.href = '/home'
+    }
 
   return (
     <div className="login-container">
       <form className="login-form" onSubmit={handleSubmit}>
-        <label htmlFor="username">Username</label>
+        <label htmlFor="email">Email</label>
         <input
           className="login-input"
           type="text"
-          id="username"
-          value={username}
-          onChange={(event) => setUsername(event.target.value)}
+          id="email"
+          value={email}
+          onChange={(event) => setEmail(event.target.value)}
         />
         <label htmlFor="password">Password</label>
         <input
