@@ -1,32 +1,32 @@
-import React, { useState, useEffect } from 'react';
-import { useParams } from 'react-router-dom';
-import axios from 'axios';
+import React, { useState, useEffect } from 'react'
+import { useParams } from 'react-router-dom'
+import axios from 'axios'
 import "./TicketDetails.css"
 
 function TicketDetails() {
-    const { id } = useParams();
-    const [ticket, setTicket] = useState({});
-    const token = localStorage.getItem('token');
+    const { id } = useParams()
+    const [ticket, setTicket] = useState({})
+    const token = localStorage.getItem('token')
 
     useEffect(() => {
         axios
             .get(`http://localhost:3001/tickets/${id}`, { headers: { Authorization: `${token}` } })
             .then((response) => {
-                setTicket(response.data);
+                setTicket(response.data)
             })
-            .catch((err) => console.log('%c err', 'color:orange', err));
-    }, [id]);
+            .catch((err) => console.err(err))
+    }, [id])
 
     const formatDate = (dateStr) => {
-        const date = new Date(dateStr);
-        const day = date.getDate();
-        const month = date.getMonth() + 1;
-        const year = date.getFullYear();
-        const hour = date.getHours();
-        const minute = date.getMinutes();
+        const date = new Date(dateStr)
+        const day = date.getDate()
+        const month = date.getMonth() + 1
+        const year = date.getFullYear()
+        const hour = date.getHours()
+        const minute = date.getMinutes()
         return `${day < 10 ? '0' + day : day}/${month < 10 ? '0' + month : month
-            }/${year} ${hour < 10 ? '0' + hour : hour}:${minute < 10 ? '0' + minute : minute}`;
-    };
+            }/${year} ${hour < 10 ? '0' + hour : hour}:${minute < 10 ? '0' + minute : minute}`
+    }
 
     return (
         <div className="ticket-details-container">
@@ -66,7 +66,7 @@ function TicketDetails() {
             </div>
         </div>
 
-    );
+    )
 }
 
-export default TicketDetails;
+export default TicketDetails

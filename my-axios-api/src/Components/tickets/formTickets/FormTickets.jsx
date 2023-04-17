@@ -1,6 +1,6 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react"
 import { AuthContext, } from "../../auth/AuthProvider"
-import { useRegisterTickets } from "./hooks";
+import { useRegisterTickets } from "./hooks"
 import './FormTickets.css'
 
 const TicketForm = () => {
@@ -141,4 +141,4 @@ const TicketForm = () => {
     )
 }
 
-export default TicketForm;
+export default TicketForm

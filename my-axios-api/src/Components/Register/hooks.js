@@ -1,14 +1,14 @@
-import axios from 'axios';
+import axios from 'axios'
 import { useState } from "react"
 
 export function useRegister() {
-    const [firstName, setFirstName] = useState("");
-    const [lastName, setLastName] = useState("");
-    const [email, setEmail] = useState("");
-    const [phone, setPhone] = useState("");
-    const [password, setPassword] = useState("");
-    const [confirmPassword, setConfirmPassword] = useState("");
-    const [errorMessage, setErrorMessage] = useState("");
+    const [firstName, setFirstName] = useState("")
+    const [lastName, setLastName] = useState("")
+    const [email, setEmail] = useState("")
+    const [phone, setPhone] = useState("")
+    const [password, setPassword] = useState("")
+    const [confirmPassword, setConfirmPassword] = useState("")
+    const [errorMessage, setErrorMessage] = useState("")
 
     const resetForm = () => {
         setFirstName("")
@@ -21,29 +21,27 @@ export function useRegister() {
     }
 
     const handleSubmit = async (event) => {
-        console.log(event, "event");
-        event.preventDefault();
+        event.preventDefault()
         if (password !== confirmPassword) {
-            setErrorMessage("Passwords do not match");
+            setErrorMessage("Passwords do not match")
         } else {
-            console.log(`Submitting form with firstName ${firstName}, lastName ${lastName}, email ${email}, phone ${phone}, password ${password}, and confirmPassword ${confirmPassword}`);
+            console.info(`Submitting form with firstName ${firstName}, lastName ${lastName}, email ${email}, phone ${phone}, password ${password}, and confirmPassword ${confirmPassword}`)
             try {
-                const response = await axios.post('http://localhost:3001/user', {
+                await axios.post('http://localhost:3001/user', {
                     firstName,
                     lastName,
                     email,
                     phone,
                     password
-                });
+                })
                 resetForm()
             } catch (error) {
-                console.error(error);
-                console.log(error);
+                console.error(error)
                 setErrorMessage(error?.response?.data?.message || "An unspecified error occurred")
             }
         }
-        console.log(`Submitting form with firstName ${firstName}, lastName ${lastName}, email ${email}, phone ${phone}, password ${password}, and confirmPassword ${confirmPassword}`);
-    };
+        console.info(`Submitting form with firstName ${firstName}, lastName ${lastName}, email ${email}, phone ${phone}, password ${password}, and confirmPassword ${confirmPassword}`)
+    }
     return {
         handleSubmit,
         errorMessage,

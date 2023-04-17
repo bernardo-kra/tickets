@@ -1,6 +1,5 @@
 import React from 'react'
 import { Routes, Route } from 'react-router-dom'
-import Home from './Components/Home/Home.jsx'
 import Register from './Components/Register/Register.jsx'
 import Navigation from './Components/Navigation/Navigation.jsx'
 import Login from './Components/Login/Login.jsx'
@@ -14,8 +13,8 @@ import UpdateTicket from './Components/tickets/UpdateTicket/UpdateTicket.jsx'
 
 const App = () => {
   const contextValue = useAuthProvider()
-  const { isLoggedIn, user } = contextValue
-  // todo use isLoggedIn forparameter new routes
+  const { user } = contextValue
+
   return (
     <AuthContext.Provider value={contextValue}>
       <Navigation />
@@ -32,4 +31,4 @@ const App = () => {
     </AuthContext.Provider >
   )
 }
-export default App;
+export default App

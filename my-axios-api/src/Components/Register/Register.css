@@ -1,7 +1,7 @@
 @import "../../aliases/theme/styles.css";
 
 body {
-    font-family: 'Lato', sans-serif;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 .registration-container {

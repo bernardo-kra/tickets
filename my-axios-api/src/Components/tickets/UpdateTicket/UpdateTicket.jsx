@@ -1,10 +1,9 @@
 import React, { useEffect, useState, useContext } from 'react'
-import { useParams, } from 'react-router-dom';
-import { AuthContext } from "../../auth/AuthProvider"
+import { useParams, } from 'react-router-dom'
 import { useRegisterTickets } from "../formTickets/hooks"
 import "../formTickets/FormTickets.css"
 function UpdateTicket() {
-    const { id } = useParams();
+    const { id } = useParams()
 
     const {
         handleUpdateSubmit,
@@ -26,7 +25,6 @@ function UpdateTicket() {
 
     useEffect(() => {
         handleGetTicket(id)
-        console.log("%c sector", "color:orange", sector);
     }, [])
 
 

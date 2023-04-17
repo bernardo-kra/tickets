@@ -1,21 +1,20 @@
-import React, { useState, useEffect } from "react";
-import axios from "axios";
-import "./MyTickets.css";
+import React, { useState, useEffect } from "react"
+import axios from "axios"
+import "./MyTickets.css"
 
 function MyTickets() {
-    const [tickets, setTickets] = useState([]);
-    const token = localStorage.getItem('token');
+    const [tickets, setTickets] = useState([])
+    const token = localStorage.getItem('token')
 
 
     const fetchTickets = async () => {
-        const response = await axios.get("http://localhost:3001/my-tickets", { headers: { Authorization: `${token}` } });
-        console.log("%c response", "color:orange", response.data.map(ticket => ticket));
-        setTickets(response.data);
-    };
+        const response = await axios.get("http://localhost:3001/my-tickets", { headers: { Authorization: `${token}` } })
+        setTickets(response.data)
+    }
 
     useEffect(() => {
-        fetchTickets();
-    }, []);
+        fetchTickets()
+    }, [])
 
     return (
         <div className="my-tickets-container">
@@ -30,7 +29,7 @@ function MyTickets() {
                 </div>
             ))}
         </div>
-    );
+    )
 }
 
 export default MyTickets
