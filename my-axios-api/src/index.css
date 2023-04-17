@@ -43,6 +43,7 @@ button {
 
 button:hover {
   background-color: var(--primary-button-contrast-color);
+  color: var(--secondary-text-color);
 }
 
 button:focus,

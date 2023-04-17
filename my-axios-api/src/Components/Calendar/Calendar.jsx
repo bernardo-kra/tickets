@@ -3,8 +3,9 @@ import { Link } from "react-router-dom"
 import MonthPicker from "./components/MonthPicker"
 import "./Calendar.css"
 import axios from 'axios'
+import { myRoutes } from "../routes/routes"
 
-const API_URL = "http://localhost:3001/tickets"
+const API_URL = `${myRoutes.routeBody}${myRoutes.routeTickets}`
 
 const Calendar = () => {
     const [currentMonth, setCurrentMonth] = useState(new Date())

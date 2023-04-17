@@ -50,13 +50,12 @@ app.post('/user', async (req, res) => {
 
         const existingUser = await collection.findOne({ email })
         if (existingUser) {
-            return res.status(400).json({ message: 'User already exists' })
+            return res.status(400).json({ message: 'Usuario ja cadastrado' })
         }
 
         const hashedPassword = await bcrypt.hash(password, 10)
 
         const result = await collection.insertOne({ firstName, lastName, email, phone, password: hashedPassword })
-        console.log(result)
         res.json({ message: `Insert _id: ${result.insertedId}` })
     } catch (error) {
         console.error(error)
@@ -132,7 +131,6 @@ app.put('/update/:id', verificarToken, async (req, res) => {
         const collection = database.collection('tickets')
 
         const ticket = await collection.findOne({ _id: new ObjectId(ticketId) })
-
         if (!ticket) {
             return res.status(404).json({ message: 'Ticket not found' })
         }
@@ -142,7 +140,6 @@ app.put('/update/:id', verificarToken, async (req, res) => {
         }
 
         const result = await collection.updateOne({ _id: new ObjectId(ticketId) }, { $set: { eventName, location, date, details, contact, startAt, endAt, sector } })
-        console.log("result", result)
 
         if (result.modifiedCount === 0) {
             return res.status(500).json({ message: 'Failed to update ticket' })
@@ -219,7 +216,6 @@ app.get('/tickets/:id', async (req, res) => {
         const collection = database.collection('tickets')
 
         const ticket = await collection.findOne({ _id: new ObjectId(id) })
-        console.log("ticket", ticket)
         if (!ticket) {
             return res.status(404).json({ error: 'Ticket not found' })
         }
@@ -230,7 +226,7 @@ app.get('/tickets/:id', async (req, res) => {
     }
 })
 
-app.get('/protegido', verificarToken, (req, res) => {
+app.get('/protect', verificarToken, (req, res) => {
     return res.status(200).json({ mensagem: 'Access allowed', user: req.user })
 })
 

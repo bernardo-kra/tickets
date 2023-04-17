@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react"
 import axios from "axios"
 import "./MyTickets.css"
+import { myRoutes } from "../../routes/routes"
 
 function MyTickets() {
     const [tickets, setTickets] = useState([])
@@ -8,7 +9,7 @@ function MyTickets() {
 
 
     const fetchTickets = async () => {
-        const response = await axios.get("http://localhost:3001/my-tickets", { headers: { Authorization: `${token}` } })
+        const response = await axios.get(`${myRoutes.routeBody}${myRoutes.routeMyTickets}`, { headers: { Authorization: `${token}` } })
         setTickets(response.data)
     }
 
@@ -23,7 +24,7 @@ function MyTickets() {
                 <div className="my-tickets-card" key={index}>
                     <h2 className="my-tickets-title" title={ticket.eventName}>{ticket.eventName}</h2>
                     <p className="my-tickets-date">Date: {ticket.date}</p>
-                    <a className="my-tickets-link" href={`/my-tickets/${ticket._id}`}>
+                    <a className="my-tickets-link" href={`${myRoutes.routeMyTicketsId(ticket._id)}`}>
                         See more details
                     </a>
                 </div>

@@ -16,10 +16,10 @@ function Register() {
 
     return (
         <div className="registration-container">
-            <h1 className="registration-header">Register</h1>
+            <h1 className="registration-header">Registro</h1>
             <hr />
             <form className="registration-form" onSubmit={handleSubmit}>
-                <label className="registration-label" htmlFor="firstName">First Name</label>
+                <label className="registration-label" htmlFor="firstName">Nome</label>
                 <input
                     className="registration-input"
                     type="text"
@@ -27,9 +27,10 @@ function Register() {
                     value={firstName.value}
                     onChange={(event) => firstName.setValue(event.target.value)}
                     pattern="^[a-zA-Z0-9]{3,}$"
+                    title= "Não pode haver caracteres especiais ou espaços"
                     required
                 />
-                <label className="registration-label" htmlFor="lastName">Last Name</label>
+                <label className="registration-label" htmlFor="lastName">Sobrenome</label>
                 <input
                     className="registration-input"
                     type="text"
@@ -37,6 +38,7 @@ function Register() {
                     value={lastName.value}
                     onChange={(event) => lastName.setValue(event.target.value)}
                     pattern="^[a-zA-Z0-9]{3,}$"
+                    title="Não pode haver caracteres especiais ou espaços"
                     required
                 />
                 <label className="registration-label" htmlFor="email">Email</label>
@@ -48,7 +50,7 @@ function Register() {
                     onChange={(event) => email.setValue(event.target.value)}
                     required
                 />
-                <label className="registration-label" htmlFor="phone">Phone</label>
+                <label className="registration-label" htmlFor="phone">Telefone</label>
                 <input
                     className="registration-input"
                     type="tel"
@@ -56,9 +58,10 @@ function Register() {
                     value={phone.value}
                     onChange={(event) => phone.setValue(event.target.value)}
                     pattern="^[0-9()-]{11,}$"
+                    title="Informar um telefone valido de até 11 digitos"
                     required
                 />
-                <label className="registration-label" htmlFor="password">Password</label>
+                <label className="registration-label" htmlFor="password">Senha</label>
                 <input
                     className="registration-input"
                     type="password"
@@ -66,10 +69,10 @@ function Register() {
                     value={password.value}
                     onChange={(event) => password.setValue(event.target.value)}
                     pattern="^(?=.*[A-Z])(?=.*[!#@$%&])(?=.*[0-9])(?=.*[a-z]).{6,15}$"
-                    title="Create a strong password containing uppercase, lowercase, special character and 8 characters"
+                    title="Crie uma senha forte contendo letras maiúsculas, minúsculas, caracteres especiais e 8 caracteres"
                     required
                 />
-                <label className="registration-label" htmlFor="confirmPassword">Confirm Password</label>
+                <label className="registration-label" htmlFor="confirmPassword">Confirmar senha</label>
                 <input
                     className="registration-input"
                     type="password"
@@ -80,7 +83,7 @@ function Register() {
                 />
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
                 <button type="submit">
-                    Register
+                    Cadastrar
                 </button>
             </form>
         </div>

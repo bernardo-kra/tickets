@@ -19,7 +19,6 @@ function UpdateTicket() {
         contact,
         startAt,
         endAt,
-        creatorId,
         sector
     } = useRegisterTickets()
 
@@ -37,7 +36,7 @@ function UpdateTicket() {
             <div className="form-tickets-container">
                 <div className="form-tickets-column">
                     <label>
-                        Event Name:
+                        Nome do Evento:
                         <input
                             type="text"
                             name="eventName"
@@ -46,7 +45,7 @@ function UpdateTicket() {
                         />
                     </label>
                     <label>
-                        Location:
+                        Localização:
                         <input
                             type="text"
                             name="location"
@@ -55,7 +54,7 @@ function UpdateTicket() {
                         />
                     </label>
                     <label>
-                        Date:
+                        Data:
                         <input
                             type="date"
                             name="date"
@@ -64,7 +63,7 @@ function UpdateTicket() {
                         />
                     </label>
                     <label>
-                        Details:
+                        Detalhes:
                         <textarea
                             name="details"
                             value={details.value || ''}
@@ -73,9 +72,8 @@ function UpdateTicket() {
                     </label>
                 </div>
                 <div className="form-tickets-column">
-
                     <label>
-                        Contact:
+                        Contato:
                         <input
                             type="text"
                             name="contact"
@@ -84,7 +82,7 @@ function UpdateTicket() {
                         />
                     </label>
                     <label>
-                        Start Time:
+                        Data/hora Inicio:
                         <input
                             type="datetime-local"
                             name="startAt"
@@ -93,7 +91,7 @@ function UpdateTicket() {
                         />
                     </label>
                     <label>
-                        End Time:
+                        Data/hora Fim:
                         <input
                             type="datetime-local"
                             name="endAt"
@@ -107,11 +105,11 @@ function UpdateTicket() {
                 sector.value.map((sectorItem, index) => (
                     <div className="not-selectable" key={index}>
                         <div className="tickets-section-header">
-                            <h3>Sector {index + 1}</h3>
-                            <button onClick={(event) => handleRemoveSector(event, index)}>Remove</button>
+                            <h3>Setores {index + 1}</h3>
+                            <button onClick={(event) => handleRemoveSector(event, index)}>Remover Setor</button>
                         </div>
                         <div className='tickets-form-sector'>
-                            <label htmlFor={`sector-${index}-name`}>Name:</label>
+                            <label htmlFor={`sector-${index}-name`}>Nome:</label>
                             <input
                                 id={`sector-${index}-name`}
                                 name={`sector-${index}-name`}
@@ -122,7 +120,7 @@ function UpdateTicket() {
                             />
                         </div>
                         <div className='tickets-form-sector'>
-                            <label htmlFor={`sector-${index}-quantity`}>Quantity:</label>
+                            <label htmlFor={`sector-${index}-quantity`}>Quantidade:</label>
                             <input
                                 id={`sector-${index}-quantity`}
                                 name={`sector-${index}-quantity`}
@@ -133,7 +131,7 @@ function UpdateTicket() {
                             />
                         </div>
                         <div className='tickets-form-sector'>
-                            <label htmlFor={`sector-${index}-value`}>Value:</label>
+                            <label htmlFor={`sector-${index}-value`}>Valor:</label>
                             <input
                                 id={`sector-${index}-value`}
                                 name={`sector-${index}-value`}
@@ -147,10 +145,8 @@ function UpdateTicket() {
                 ))
             }
 
-            <button onClick={handleAddSector}>Add sector</button>
-
-            <button type="submit">Save Changes</button>
-            {/* <button type="button" onClick={returnToTicketsPage}>Cancel</button> */}
+            <button onClick={handleAddSector}>Adicionar Setor</button>
+            <button className="tickets-button-submit" type="submit">Salvar</button>
         </form>
     )
 }

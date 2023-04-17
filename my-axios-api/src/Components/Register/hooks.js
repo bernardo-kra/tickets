@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useState } from "react"
+import { myRoutes } from "../routes/routes"
 
 export function useRegister() {
     const [firstName, setFirstName] = useState("")
@@ -27,7 +28,7 @@ export function useRegister() {
         } else {
             console.info(`Submitting form with firstName ${firstName}, lastName ${lastName}, email ${email}, phone ${phone}, password ${password}, and confirmPassword ${confirmPassword}`)
             try {
-                await axios.post('http://localhost:3001/user', {
+                const response = await axios.post(`${myRoutes.routeBody}${myRoutes.routeUser}`, {
                     firstName,
                     lastName,
                     email,
@@ -35,6 +36,9 @@ export function useRegister() {
                     password
                 })
                 resetForm()
+                if (response.status === 200) {
+                    return window.location.href = `${myRoutes.routeLogin}`
+                }
             } catch (error) {
                 console.error(error)
                 setErrorMessage(error?.response?.data?.message || "An unspecified error occurred")

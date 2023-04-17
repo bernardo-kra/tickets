@@ -1,5 +1,6 @@
 import axios from 'axios'
 import { useState } from "react"
+import { myRoutes } from "../../routes/routes"
 
 export function useRegisterTickets() {
     const [eventName, setEventName] = useState("")
@@ -17,6 +18,7 @@ export function useRegisterTickets() {
     const token = localStorage.getItem('token')
 
     const resetForm = () => {
+        setErrorMessage("")
         setEventName("")
         setLocation("")
         setDate("")
@@ -79,7 +81,7 @@ export function useRegisterTickets() {
     const handleSubmit = async (event) => {
         event.preventDefault()
         try {
-            await axios.post(`http://localhost:3001/create-tickets`,
+            await axios.post(`${myRoutes.routeBody}${myRoutes.routeCreateTickets}`,
                 {
                     eventName,
                     location,
@@ -91,7 +93,7 @@ export function useRegisterTickets() {
                     creatorId,
                     sector,
                 }, { headers: { Authorization: `${token}` } })
-
+            resetForm()
         } catch (error) {
             console.error(error)
             setErrorMessage(error?.response?.data?.message || "An unspecified error occurred")
@@ -101,7 +103,7 @@ export function useRegisterTickets() {
     const handleUpdateSubmit = async (event, ticketId) => {
         event.preventDefault()
         try {
-            await axios.put(`http://localhost:3001/update/${ticketId}`,
+            await axios.put(`${myRoutes.routeBody}${myRoutes.routeUpdate(ticketId)}`,
                 {
                     eventName,
                     location,
@@ -122,7 +124,7 @@ export function useRegisterTickets() {
 
     const handleGetTicket = async (ticketId) => {
         try {
-            const response = await axios.get(`http://localhost:3001/my-tickets/${ticketId}`, { headers: { Authorization: `${token}` } })
+            const response = await axios.get(`${myRoutes.routeBody}${myRoutes.routeMyTicketsId(ticketId)}`, { headers: { Authorization: `${token}` } })
             const data = response.data
             if (response) {
                 setEventName(data.eventName)

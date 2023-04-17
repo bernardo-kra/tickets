@@ -1,11 +1,13 @@
 import { useState, createContext, useEffect } from 'react'
 import axios from 'axios'
+import myRoutes from '../routes/routes'
 
 const AuthContext = createContext()
 
 const useAuthProvider = () => {
     const [isLoggedIn, setIsLoggedIn] = useState(false)
     const [user, setUser] = useState(localStorage.getItem('userId') || null)
+    const [messageErr, setMessageErr] = useState("")
 
     const checkLoginStatus = async () => {
         const token = localStorage.getItem('token')
@@ -14,7 +16,7 @@ const useAuthProvider = () => {
         if (token) {
             try {
                 
-                 await axios.get('http://localhost:3001/protegido', {
+                await axios.get(`${myRoutes.routeBody}${myRoutes.routeProtect}`, {
                     headers: { Authorization: `${token}` },
                 })
                 setIsLoggedIn(true)
@@ -31,7 +33,7 @@ const useAuthProvider = () => {
 
     const handleLogin = async (credentials) => {
         try {
-            const response = await axios.post('http://localhost:3001/login', credentials)
+            const response = await axios.post(`${myRoutes.routeBody}${myRoutes.routeLogin}`, credentials)
             localStorage.setItem('token', response.data.token)
             localStorage.setItem('userId', response.data.user.id)
 
@@ -39,7 +41,7 @@ const useAuthProvider = () => {
 
             setUser(response.data.user.id)
         } catch (err) {
-            console.error(err)
+            setMessageErr(err)
         }
     }
 
@@ -54,6 +56,7 @@ const useAuthProvider = () => {
     return {
         isLoggedIn,
         user,
+        messageErr,
         login: handleLogin,
         logout: handleLogout,
     }
