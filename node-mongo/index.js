@@ -13,7 +13,6 @@ const app = express()
 app.use(cors())
 app.use(express.json())
 
-
 const verificarToken = (req, res, next) => {
     const removeBearer = (token) => {
         const pattern = /bearer /gi
@@ -73,8 +72,6 @@ app.post('/login', async (req, res) => {
     try {
         await client.connect()
         const { email, password } = req.body
-
-        // Buscar usuário no banco de dados
         const database = client.db('tickets')
         const collection = database.collection('user')
         const user = await collection.findOne({ email })
