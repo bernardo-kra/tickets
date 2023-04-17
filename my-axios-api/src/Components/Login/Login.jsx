@@ -1,5 +1,5 @@
-import { useState, useEffect, useContext } from 'react'
-import { AuthContext,  } from "../auth/AuthProvider"
+import { useState, useContext } from 'react'
+import { AuthContext } from "../auth/AuthProvider"
 import './Login.css'
 
 function Login() {
@@ -12,10 +12,10 @@ function Login() {
     const credentials = { email, password }
     login(credentials)
   }
-
-    if (isLoggedIn) {
-      return window.location.href = '/home'
-    }
+  
+  if (isLoggedIn) {
+    return window.location.href = '/'
+  }
 
   return (
     <div className="login-container">

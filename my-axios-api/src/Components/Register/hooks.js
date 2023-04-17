@@ -35,7 +35,6 @@ export function useRegister() {
                     phone,
                     password
                 });
-                console.log(response.data, "bernardo");
                 resetForm()
             } catch (error) {
                 console.error(error);
