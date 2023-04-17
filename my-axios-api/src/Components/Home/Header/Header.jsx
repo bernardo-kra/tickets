@@ -1,31 +1,33 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import { Link } from 'react-router-dom';
+import { AuthContext } from '../../auth/AuthProvider.jsx'
+import Logout from "../../Login/Logout";
+
 import './Header.css';
 
 const Header = () => {
-    return (
-      <header className="header">
-        <nav>
-          <ul>
-            <li>
-              <Link to="/">Home</Link>
-            </li>
-            <li>
-              <Link to="/tickets">Tickets</Link>
-            </li>
-            <li>
-              <Link to="/eventos">Eventos</Link>
-            </li>
-            <li>
-              <Link to="/sobre-nos">Sobre nós</Link>
-            </li>
-            <li className="right">
-              <Link to="/login">Login</Link>
-            </li>
-          </ul>
-        </nav>
-      </header>
-    );
-  };
+  const { isLoggedIn, user } = useContext(AuthContext)
 
-  export default Header
+  return (
+    <header className="header">
+      <div className='header-content not-selectable'>
+        <Link to="/">Home</Link>
+        {isLoggedIn ?
+          <>
+            <Link to="my-tickets">My-tickets</Link>
+            <Link to="create-tickets">Create-tickets</Link>
+            <Link ><Logout /></Link>
+          </>
+          :
+          <div className="navigation-logout">
+            <Link to="/register">Register</Link>
+            <a> - </a>
+            <Link to="/login">Login</Link>
+          </div>
+        }
+      </div>
+    </header >
+  );
+};
+
+export default Header
