@@ -1,6 +1,6 @@
-import React, { useEffect, useContext } from "react";
+import React, { useContext } from "react"
 import { AuthContext, } from "../../auth/AuthProvider"
-import { useRegisterTickets } from "./hooks";
+import { useRegisterTickets } from "./hooks"
 import './FormTickets.css'
 
 const TicketForm = () => {
@@ -27,7 +27,7 @@ const TicketForm = () => {
             <div className="form-tickets-container">
                 <div className="form-tickets-column">
                     <label >
-                        Event Name:
+                        Nome do evento:
                         <input
                             type="text"
                             value={eventName.value}
@@ -35,7 +35,7 @@ const TicketForm = () => {
                         />
                     </label>
                     <label>
-                        Location:
+                        Localização:
                         <input
                             type="text"
                             value={location.value}
@@ -43,7 +43,7 @@ const TicketForm = () => {
                         />
                     </label>
                     <label>
-                        Date:
+                        Data:
                         <input
                             type="date"
                             value={date.value}
@@ -51,7 +51,7 @@ const TicketForm = () => {
                         />
                     </label>
                     <label>
-                        Details:
+                        Detalhes:
                         <textarea
                             maxLength="3000"
                             value={details.value}
@@ -61,7 +61,7 @@ const TicketForm = () => {
                 </div>
                 <div className="form-tickets-column">
                     <label>
-                        Contact:
+                        Contato:
                         <input
                             id="myInput"
                             type="text"
@@ -70,7 +70,7 @@ const TicketForm = () => {
                         />
                     </label>
                     <label>
-                        Start At:
+                        Data/Hora Inicio:
                         <input
                             type="datetime-local"
                             value={startAt.value}
@@ -78,7 +78,7 @@ const TicketForm = () => {
                         />
                     </label>
                     <label>
-                        End At:
+                        Data/Hora Fim:
                         <input
                             type="datetime-local"
                             value={endAt.value}
@@ -86,7 +86,7 @@ const TicketForm = () => {
                         />
                     </label>
                     <label>
-                        Creator ID:
+                        Id do Criador:
                         <input
                             title={user}
                             type="text"
@@ -101,10 +101,10 @@ const TicketForm = () => {
                 <div className="not-selectable" key={index}>
                     <div className="tickets-section-header">
                         <h3>Sector {index + 1}</h3>
-                        <button onClick={(event) => handleRemoveSector(event, index)}>Remove</button>
+                        <button onClick={(event) => handleRemoveSector(event, index)}>Remover Setor</button>
                     </div>
                     <div className='tickets-form-sector'>
-                        <label htmlFor={`sector-${index}-name`}>Name:</label>
+                        <label htmlFor={`sector-${index}-name`}>Nome:</label>
                         <input
                             id={`sector-${index}-name`}
                             name={`sector-${index}-name`}
@@ -114,7 +114,7 @@ const TicketForm = () => {
                         />
                     </div>
                     <div className='tickets-form-sector'>
-                        <label htmlFor={`sector-${index}-quantity`}>Quantity:</label>
+                        <label htmlFor={`sector-${index}-quantity`}>Quantidade:</label>
                         <input
                             id={`sector-${index}-quantity`}
                             name={`sector-${index}-quantity`}
@@ -124,7 +124,7 @@ const TicketForm = () => {
                         />
                     </div>
                     <div className='tickets-form-sector'>
-                        <label htmlFor={`sector-${index}-value`}>Value:</label>
+                        <label htmlFor={`sector-${index}-value`}>Valor:</label>
                         <input
                             id={`sector-${index}-value`}
                             name={`sector-${index}-value`}
@@ -135,10 +135,10 @@ const TicketForm = () => {
                     </div>
                 </div>
             ))}
-            <button onClick={handleAddSector}>Add sector</button>
-            <button className="tickets-button-submit" type="submit">Create ticket</button>
+            <button onClick={handleAddSector}>Adicionar Setor</button>
+            <button className="tickets-button-submit" type="submit">Criar evento</button>
         </form>
     )
 }
 
-export default TicketForm;
+export default TicketForm

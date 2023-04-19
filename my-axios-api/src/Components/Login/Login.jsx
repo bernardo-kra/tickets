@@ -5,7 +5,7 @@ import './Login.css'
 function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const { isLoggedIn, login } = useContext(AuthContext)
+  const { isLoggedIn, login, messageErr } = useContext(AuthContext)
 
   const handleSubmit = (event) => {
     event.preventDefault()
@@ -28,7 +28,7 @@ function Login() {
           value={email}
           onChange={(event) => setEmail(event.target.value)}
         />
-        <label htmlFor="password">Password</label>
+        <label htmlFor="password">Senha</label>
         <input
           className="login-input"
           type="password"
@@ -36,6 +36,7 @@ function Login() {
           value={password}
           onChange={(event) => setPassword(event.target.value)}
         />
+        {messageErr && <p className='login-err'>Email ou senha incorreto(s)</p>}
         <button className="login-button" type="submit">
           Login
         </button>

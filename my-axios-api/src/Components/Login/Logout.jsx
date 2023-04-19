@@ -5,7 +5,7 @@ const Logout = () => {
     const { logout } = useContext(AuthContext)
 
     return (
-        <div onClick={logout}>Logout</div>
+        <div onClick={logout}>Sair</div>
     )
 }
 
