@@ -55,8 +55,8 @@ function TicketDetails() {
                         {ticket.sector && ticket.sector.map((sector, index) => (
                             <div key={index} className="ticket-sector-card">
                                 <h3>{sector.name}</h3>
-                                <p>Price: ${sector.value}</p>
-                                <button className="ticket-buy-button">Buy</button>
+                                <p>Preço: R$: {sector.value}</p>
+                                <button className="ticket-buy-button">Comprar</button>
                             </div>
                         ))}
                     </div>

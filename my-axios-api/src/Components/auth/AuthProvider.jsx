@@ -15,7 +15,6 @@ const useAuthProvider = () => {
 
         if (token) {
             try {
-                
                 await axios.get(`${myRoutes.routeBody}${myRoutes.routeProtect}`, {
                     headers: { Authorization: `${token}` },
                 })

@@ -101,7 +101,7 @@ const TicketForm = () => {
                 <div className="not-selectable" key={index}>
                     <div className="tickets-section-header">
                         <h3>Sector {index + 1}</h3>
-                        <button onClick={(event) => handleRemoveSector(event, index)}>Remove Setor</button>
+                        <button onClick={(event) => handleRemoveSector(event, index)}>Remover Setor</button>
                     </div>
                     <div className='tickets-form-sector'>
                         <label htmlFor={`sector-${index}-name`}>Nome:</label>
@@ -136,7 +136,7 @@ const TicketForm = () => {
                 </div>
             ))}
             <button onClick={handleAddSector}>Adicionar Setor</button>
-            <button className="tickets-button-submit" type="submit">Create ticket</button>
+            <button className="tickets-button-submit" type="submit">Criar evento</button>
         </form>
     )
 }

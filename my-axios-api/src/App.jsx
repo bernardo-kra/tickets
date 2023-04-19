@@ -23,7 +23,6 @@ const App = () => {
         <Route path="/my-tickets/:id" element={<UpdateTicket />} />
         <Route path="/my-tickets" element={<MyTickets />} />
         <Route path="/" element={<Calendar></Calendar>}/>
-        <Route path="/home" element={<TicketDetails/>} />
         <Route path='create-tickets' element={<FormTickets></FormTickets>}/>
         <Route path="/register" element={<Register user={user} />} />
         <Route path="/login" element={<Login />} />

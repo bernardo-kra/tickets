@@ -7,7 +7,6 @@ function MyTickets() {
     const [tickets, setTickets] = useState([])
     const token = localStorage.getItem('token')
 
-
     const fetchTickets = async () => {
         const response = await axios.get(`${myRoutes.routeBody}${myRoutes.routeMyTickets}`, { headers: { Authorization: `${token}` } })
         setTickets(response.data)

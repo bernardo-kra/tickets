@@ -26,7 +26,6 @@ export function useRegister() {
         if (password !== confirmPassword) {
             setErrorMessage("Passwords do not match")
         } else {
-            console.info(`Submitting form with firstName ${firstName}, lastName ${lastName}, email ${email}, phone ${phone}, password ${password}, and confirmPassword ${confirmPassword}`)
             try {
                 const response = await axios.post(`${myRoutes.routeBody}${myRoutes.routeUser}`, {
                     firstName,
@@ -44,7 +43,6 @@ export function useRegister() {
                 setErrorMessage(error?.response?.data?.message || "An unspecified error occurred")
             }
         }
-        console.info(`Submitting form with firstName ${firstName}, lastName ${lastName}, email ${email}, phone ${phone}, password ${password}, and confirmPassword ${confirmPassword}`)
     }
     return {
         handleSubmit,
