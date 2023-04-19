@@ -1,33 +1,31 @@
-import React, { useContext } from 'react';
-import { Link } from 'react-router-dom';
+import React, { useContext } from 'react'
+import { Link } from 'react-router-dom'
 import { AuthContext } from '../../auth/AuthProvider.jsx'
-import Logout from "../../Login/Logout";
-
-import './Header.css';
+import Logout from "../../Login/Logout"
+import './Header.css'
 
 const Header = () => {
-  const { isLoggedIn, user } = useContext(AuthContext)
-
+  const { isLoggedIn } = useContext(AuthContext)
   return (
     <header className="header">
       <div className='header-content not-selectable'>
-        <Link to="/">Home</Link>
+        <Link to="/">Inicial</Link>
         {isLoggedIn ?
           <>
-            <Link to="my-tickets">My-tickets</Link>
-            <Link to="create-tickets">Create-tickets</Link>
+            <Link to="my-tickets">Meus Ingressos</Link>
+            <Link to="create-tickets">Criar Evento</Link>
             <Link ><Logout /></Link>
           </>
           :
           <div className="navigation-logout">
-            <Link to="/register">Register</Link>
+            <Link to="/register">Cadastrar</Link>
             <a> - </a>
-            <Link to="/login">Login</Link>
+            <Link to="/login">Entrar</Link>
           </div>
         }
       </div>
     </header >
-  );
-};
+  )
+}
 
 export default Header

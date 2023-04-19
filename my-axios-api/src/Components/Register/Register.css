@@ -1,7 +1,7 @@
 @import "../../aliases/theme/styles.css";
 
 body {
-    font-family: 'Lato', sans-serif;
+    font-family: Inter, system-ui, Avenir, Helvetica, Arial, sans-serif;
 }
 
 .registration-container {
@@ -19,7 +19,6 @@ body {
 }
 
 .registration-header {
-    /* font-size: clamp(1rem, 2rem, 48px); */
     text-align: left;
     margin: 1.5rem 0;
 }

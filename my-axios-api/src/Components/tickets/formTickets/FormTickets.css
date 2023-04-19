@@ -39,7 +39,7 @@ label {
     margin-right: 1rem;
 }
 
-input ,textarea{
+input, textarea {
     margin-bottom: 1rem;
     padding: 0.5rem;
     border-radius: 5px;
@@ -63,6 +63,6 @@ button {
     height: 40px;
 }
 
-.tickets-button-submit button{
-    width: 50%;
+.form-tickets .tickets-button-submit {
+    width: 300px;
 }
